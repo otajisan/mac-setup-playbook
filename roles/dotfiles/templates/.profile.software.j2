@@ -1,0 +1,43 @@
+# Jupyter
+jupyter() {
+    cd ~/github/jupyter
+    docker-compose up -d
+    docker logs jupyter_jupyterlab_1
+    open http://localhost:8888
+}
+
+# Re:dash
+redash() {
+    cd ~/github/redash
+    docker-compose up -d
+    open http://localhost
+}
+
+# Local MySQL
+mysql_local() {
+    mysql -h 127.0.0.1 -P 3306 -u mc_rw -ppassword
+}
+
+# Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+# Rust - Cargo
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# SonarQube Scanner
+export PATH="$PATH:/usr/local/share/sonar-scanner/bin"
+
+# AWS CLI
+export PATH=~/.local/bin:$PATH
+
+# tmux
+[[ -z "$TMUX" && ! -z "$PS1" ]] && exec tmux
+alias tmux-copy='tmux save-buffer - | pbcopy'
+if [ -n "$TMUX" ]; then
+  alias pbcopy="reattach-to-user-namespace pbcopy"
+fi
+
+# sdkman
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

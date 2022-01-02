@@ -1,0 +1,78 @@
+if [ -f ~/.profile.local ]; then
+    . ~/.profile.local
+fi
+
+if [ -f ~/.git-prompt.sh ]; then
+    . ~/.git-prompt.sh
+fi
+
+if [ -f ~/.git-completion.bash ]; then
+    . ~/.git-completion.bash
+fi
+
+if [ -f ~/.dockerrc ]; then
+    . ~/.dockerrc
+fi
+
+if [ -f ~/.profile.local ]; then
+    . ~/.profile.local
+fi
+
+if [ -f ~/.profile.anyenv ]; then
+    . ~/.profile.anyenv
+fi
+
+if [ -f ~/.profile.software ]; then
+    . ~/.profile.software
+fi
+
+# ls color for mac or linux
+case "${OSTYPE}" in
+darwin*)
+    alias ls='ls -G'
+    ;;
+linux*)
+    alias ls='ls --color'
+    ;;
+esac
+
+alias l='ls -l'
+alias ll='ls -l'
+alias la='ls -la'
+
+# vimfiler
+alias vf='vim +VimFiler'
+
+vprofile()
+{
+    vim ~/.zprofile
+}
+
+sprofile()
+{
+    source ~/.zprofile
+}
+
+git_config()
+{
+    branch_name=$1
+    git config branch.$branch_name.remote origin
+    git config branch.$branch_name.remote.merge refs/heads/$branch_name.remote
+}
+
+dsize() {
+    sudo du / | sort -nr | head -n 100
+}
+
+# close all screen
+scrd()
+{
+    screen -r -X quit
+}
+
+# check remained screen processes
+psck()
+{
+    ps aux | grep "SCREEN"
+    ps aux | grep "screen"
+}

@@ -1,0 +1,12 @@
+---
+default_shell: /bin/zsh
+
+# https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+zsh_theme: bira
+
+# anyenv
+pyenv_version: 3.9.0
+nodenv_version: 17.0.1
+goenv_version: 1.17.0
+java_version: openjdk-13.0.1.jdk
+jenv_version: openjdk64-13.0.1

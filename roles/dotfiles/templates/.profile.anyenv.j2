@@ -1,0 +1,46 @@
+# anyenv
+if [ -d ${HOME}/.anyenv ] ; then
+    export PATH="$HOME/.anyenv/bin:$PATH"
+    eval "$(anyenv init -)"
+    # for tmux
+    for D in `ls $HOME/.anyenv/envs`
+    do
+        echo "setting PATH for [$D]"
+        export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
+    done
+fi
+
+# Python
+export PYTHON_VERSION={{ pyenv_version }}
+if [ ! -d $HOME/.anyenv/envs/pyenv/versions/$PYTHON_VERSION ]; then
+  pyenv install $PYTHON_VERSION
+fi
+pyenv global $PYTHON_VERSION
+echo Now using python $PYTHON_VERSION
+
+# Node
+if [ ! -d $HOME/.anyenv/envs/nodenv/versions/{{ nodenv_version }} ]; then
+  nodenv install {{ nodenv_version }}
+fi
+nodenv global {{ nodenv_version }}
+echo Now using node {{ nodenv_version }}
+
+# Go
+export GO_VERSION={{ goenv_version }}
+if [ ! -d $HOME/.anyenv/envs/goenv/versions/$GO_VERSION ]; then
+  goenv install $GO_VERSION
+fi
+export GOROOT=$HOME/.anyenv/envs/goenv/versions/$GO_VERSION
+export GOPATH=$HOME/go
+export PATH=$HOME/.anyenv/envs/goenv/shims/bin:$PATH
+export PATH=$GOROOT/bin:$PATH
+export PATH=$GOPATH/bin:$PATH
+goenv global $GO_VERSION
+echo Now using golang $GO_VERSION
+
+# Java
+export JAVA_VERSION={{ java_version }}
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/$JAVA_VERSION/Contents/Home"
+export PATH=$HOME/.anyenv/envs/jenv/shims/bin:$PATH
+jenv global {{ jenv_version }}
+echo Now using java $JAVA_VERSION

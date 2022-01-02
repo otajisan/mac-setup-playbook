@@ -1,0 +1,18 @@
+COLOR_SKYBLUE="\[\033[36m\]"
+COLOR_YELLOW="\[\033[33m\]"
+COLOR_PINK="\[\033[35m\]"
+COLOR_WHITE="\[\033[0m\]"
+USER_NAME="\u"
+HOST="\H"
+DIR="\$(pwd)"
+DATE_TIME="\$(date +'%Y/%m/%d') \t"
+export PS1="$COLOR_SKYBLUE[$USER_NAME@$HOST:$DIR]$COLOR_YELLOW\$(__git_ps1) $COLOR_PINK$DATE_TIME \n$COLOR_PINK$ $COLOR_WHITE";
+
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWSTASHSTATE=true
+GIT_PS1_SHOWUPSTREAM=auto
+
+if [ -f ~/.profile ]; then
+    . ~/.profile
+fi

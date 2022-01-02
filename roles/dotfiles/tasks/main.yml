@@ -1,0 +1,10 @@
+---
+- block:
+  - name: copy dotfiles
+    template:
+      src: "{{ item }}.j2"
+      dest: $HOME/{{ item }}
+    with_items: '{{ dotfiles }}'
+    notify: reload shell
+  tags:
+    - dotfiles

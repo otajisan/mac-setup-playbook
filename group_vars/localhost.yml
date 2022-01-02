@@ -1,0 +1,10 @@
+dotfiles:
+  - .bash_profile
+  - .bashrc
+  - .zprofile
+  - .zshrc
+  - .profile
+  - .profile.anyenv
+  - .profile.software
+  - .tmux.conf
+  - .dockerrc
