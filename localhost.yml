@@ -17,4 +17,6 @@
       tags: aws
     - name: sdkman
       tags: sdkman
+    - name: twitter-client
+      tags: twitter-client
 

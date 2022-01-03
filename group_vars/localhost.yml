@@ -59,8 +59,9 @@ anyenv:
       - 3.10.0
   - name: nodenv
     legacy: no
-    global: 17.0.1
+    global: 16.13.0
     versions:
+      - 16.13.0
       - 17.0.1
   - name: goenv
     legacy: no
@@ -69,9 +70,11 @@ anyenv:
       - 1.17.0
   - name: rbenv
     legacy: no
-    global: 2.5.0
+    global: 3.0.2
     versions:
       - 2.5.0
+      - 2.7.4
+      - 3.0.2
   - name: erlenv
     legacy: yes
     global: 24.2

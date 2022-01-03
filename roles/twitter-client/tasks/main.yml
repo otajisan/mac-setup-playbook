@@ -1,0 +1,7 @@
+---
+# https://github.com/orakaro/rainbowstream
+- name: Install Twitter clinet
+  pip:
+    name: rainbowstream
+    state: present
+    executable: $HOME/.anyenv/envs/pyenv/shims/pip3

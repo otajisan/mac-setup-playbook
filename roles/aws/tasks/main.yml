@@ -35,3 +35,16 @@
   tags:
     - aws
     - eksctl
+
+- block:
+  - name: Install typescript
+    npm:
+      name: typescript
+      global: yes
+      state: present
+
+  - name: Install AWS CDK
+    npm:
+      name: aws-cdk
+      global: yes
+      state: present
