@@ -1,6 +1,5 @@
 # default shell
 set-option -g default-shell {{ default_shell }}
-set-option -g default-shell /bin/zsh
 
 # color settings
 set-option -g default-terminal screen-256color
@@ -84,5 +83,5 @@ run-shell '~/.tmux/plugins/tpm/tpm'
 
 # paste extension
 set-window-option -g mode-keys vi
-set-option -g default-command "reattach-to-user-namespace -l fish"
+set-option -g default-command "reattach-to-user-namespace -l zsh"
 bind y run-shell '~/bin/tmux-pbcopy'
