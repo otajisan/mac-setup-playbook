@@ -1,10 +1,51 @@
 ---
-- block:
-  - name: copy dotfiles
-    template:
-      src: "{{ item }}.j2"
-      dest: $HOME/{{ item }}
-    with_items: '{{ dotfiles }}'
-    notify: reload shell
-  tags:
-    - dotfiles
+- name: check oh-my-zsh installed
+  stat:
+    path: $HOME/.oh-my-zsh
+    get_checksum: false
+    get_md5: false
+  register: ohmyzsh_installed
+
+- name: oh-my-zsh Installation
+  block:
+    - name: Download oh-my-zsh
+      uri:
+        url: https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+        return_content: yes
+      register: ohmyzsh
+
+    - name: Install oh-my-zsh
+      shell: "{{ ohmyzsh.content }}"
+      notify: reload shell
+
+    - name: Install zsh-autosuggestions
+      shell: >
+        git clone https://github.com/zsh-users/zsh-autosuggestions
+        ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+    - name: Install zsh-syntax-highlighting
+      homebrew:
+        name: zsh-syntax-highlighting
+        state: present
+
+    - name: Install coreutils
+      homebrew:
+        name: coreutils
+        state: present
+
+    - name: Install color theme
+      get_url:
+        #url: https://raw.githubusercontent.com/caiogondim/bullet-train-oh-my-zsh-theme/master/bullet-train.zsh-theme
+        url: https://raw.githubusercontent.com/ChesterYue/ohmyzsh-theme-passion/master/passion.zsh-theme
+        dest: $HOME/.oh-my-zsh/custom/themes/
+
+  when: not ohmyzsh_installed.stat.exists
+
+- name: dotfiles configuration
+  block:
+    - name: copy dotfiles
+      template:
+        src: "{{ item }}.j2"
+        dest: $HOME/{{ item }}
+      with_items: '{{ dotfiles }}'
+      notify: reload shell

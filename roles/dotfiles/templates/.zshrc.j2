@@ -66,10 +66,16 @@ ZSH_THEME="{{ zsh_theme }}"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  zsh-syntax-highlighting
-  zsh-completions
+  dotenv
+  macos
+  compleat
+  zsh-autosuggestions
 )
+
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 autoload -U compinit && compinit -u
+zstyle ':completion:*:default' menu select=2
 
 source $ZSH/oh-my-zsh.sh
 

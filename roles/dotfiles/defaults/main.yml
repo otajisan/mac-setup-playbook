@@ -2,7 +2,7 @@
 default_shell: /bin/zsh
 
 # https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-zsh_theme: bira
+zsh_theme: passion
 
 # anyenv
 pyenv_version: 3.10.0
