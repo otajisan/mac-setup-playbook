@@ -3,8 +3,15 @@
   gather_facts: no
   become: no
   roles:
-    - homebrew
-    - homebrew-cask
-    - anyenv
-    - dotfiles
-    - aws
+    - name: homebrew
+      tags: homebrew
+    - name: homebrew-cask
+      tags: homebrew-cask
+    - name: anyenv
+      tags: anyenv
+    - name: dotfiles
+      tags: dotfiles
+    - name: aws
+      tags: aws
+    - name: sdkman
+      tags: sdkman

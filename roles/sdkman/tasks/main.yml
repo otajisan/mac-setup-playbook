@@ -1,0 +1,33 @@
+---
+- name: check sdk installed
+  stat:
+    path: $HOME/.sdkman
+    get_checksum: false
+    get_md5: false
+  register: sdkman_installed
+
+# https://sdkman.io/install
+- block:
+  - name: Download sdkman
+    uri:
+      url: https://get.sdkman.io
+      return_content: yes
+    register: sdkman_io
+
+  - name: Install sdkman
+    shell: "{{ sdkman_io.content }}"
+    notify:
+      - reload shell
+      - init sdkman
+
+  when: not sdkman_installed.stat.exists
+
+- name: Update sdkman
+  command: bash -lc "sdk update"
+
+- name: Install gradle
+  command: bash -lc "sdk install gradle {{ item }}"
+  with_items: "{{ sdkman.gradle_versions }}"
+
+- name: Set current gradle
+  command: bash -lc "sdk use gradle {{ sdkman.global }}"

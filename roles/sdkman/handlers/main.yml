@@ -1,0 +1,6 @@
+---
+- name: reload shell
+  shell: $SHELL -l
+
+- name: init sdkman
+  shell: ~/.sdkman/bin/sdkman-init.sh

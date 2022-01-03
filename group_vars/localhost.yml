@@ -35,8 +35,8 @@ homebrew:
     - name: corretto8
     - name: corretto11
     # adopt open jdk
+    - name: adoptopenjdk
     - name: adoptopenjdk8
-    - name: adoptopenjdk11
     # Microsoft Open JDK
     - name: microsoft-openjdk
     - name: microsoft-openjdk11
@@ -53,11 +53,6 @@ dotfiles:
   - .dockerrc
 
 anyenv:
-  - name: jenv
-    legacy: yes
-    global: openjdk64-13.0.1
-    versions:
-      - ""
   - name: pyenv
     legacy: no
     global: 3.10.0
@@ -93,8 +88,19 @@ anyenv:
     global: 1.1.2
     versions:
       - 1.1.2
-  #- name: sbtenv
-  #  legacy: no
-  #  global: sbt-1.1.1
-  #  versions:
-  #    - sbt-1.1.1
+  - name: jenv
+    legacy: yes
+    global: openjdk64-13.0.1
+    versions:
+      - ""
+  - name: sbtenv
+    legacy: no
+    global: sbt-1.1.1
+    versions:
+      - sbt-1.1.1
+
+sdkman:
+  global: 7.3.3
+  gradle_versions:
+    - 6.9.2
+    - 7.3.3
