@@ -11,7 +11,10 @@
       tags: anyenv
     - name: dotfiles
       tags: dotfiles
+    - name: neovim
+      tags: neovim
     - name: aws
       tags: aws
     - name: sdkman
       tags: sdkman
+

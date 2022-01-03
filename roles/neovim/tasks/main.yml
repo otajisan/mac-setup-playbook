@@ -1,0 +1,71 @@
+---
+- name: check neovim installed
+  stat:
+    path: /usr/local/bin/nvim
+    get_checksum: false
+    get_md5: false
+  register: neovim_installed
+
+- name: neovim installation
+  block:
+    - name: update homebrew
+      homebrew:
+        update_homebrew: yes
+        upgrade_all: yes
+
+    - name: Install neovim
+      homebrew:
+        name: neovim
+        state: present
+
+    - name: Make config directory
+      file:
+        path: $HOME/.config/nvim
+        state: directory
+        mode: 0755
+
+  when: not neovim_installed.stat.exists
+
+- name: Configure neovim
+  block:
+    - name: Check packer.nvim installed
+      stat:
+        path: $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
+        get_checksum: false
+        get_md5: false
+      register: packer_installed
+
+    - name: Install packer.nvim
+      command: |-
+        git clone --depth 1 https://github.com/wbthomason/packer.nvim
+        $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
+      when: not packer_installed.stat.exists
+
+    - name: Make neovim lua directory
+      file:
+        path: $HOME/.config/nvim/lua
+        state: directory
+        mode: 0755
+
+    - name: copy plugins.lua
+      copy:
+        src: "files/plugins.lua"
+        dest: $HOME/.config/nvim/lua/plugins.lua
+        mode: '0644'
+
+    - name: Download galaxyline spaceline
+      get_url:
+        url: https://raw.githubusercontent.com/glepnir/galaxyline.nvim/main/example/spaceline.lua
+        dest: $HOME/.config/nvim/lua/spaceline.lua
+
+    - name: Download galaxyline eviline
+      get_url:
+        url: https://raw.githubusercontent.com/glepnir/galaxyline.nvim/main/example/eviline.lua
+        dest: $HOME/.config/nvim/lua/eviline.lua
+
+    - name: copy init.lua
+      copy:
+        src: "files/init.lua"
+        dest: $HOME/.config/nvim/init.lua
+        mode: '0644'
+

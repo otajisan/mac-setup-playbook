@@ -10,7 +10,6 @@ homebrew:
     - name: jq
     - name: tree
     - name: vim
-    - name: neovim
     - name: wget
     - name: snyk
     - name: fish
