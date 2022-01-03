@@ -3,7 +3,8 @@
   gather_facts: no
   become: no
   roles:
-  #  - homebrew
-  #  - homebrew_cask
+    - homebrew
+    - homebrew-cask
+    - anyenv
     - dotfiles
-  #  - vscode
+    - aws

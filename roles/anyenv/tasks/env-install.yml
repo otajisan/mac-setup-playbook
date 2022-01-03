@@ -1,0 +1,82 @@
+---
+- name: general envs installation
+  block:
+    - name: Install {{ runtime_name }}
+      command: "{{ runtime_name }} install {{ runtime_version }} --skip-existing"
+      notify: reload shell
+
+    - name: Set {{ runtime_name }} global
+      command: "{{ runtime_name }} global {{ runtime_global }}"
+
+  when: not runtime_legacy
+
+- name: tfenv installation
+  block:
+    - name: Install tfenv
+      command: "tfenv install {{ runtime_version }}"
+      notify: reload shell
+
+    - name: use tfenv global version
+      command: "tfenv use {{ runtime_global }}"
+
+  when: runtime_legacy and runtime_name == 'tfenv'
+
+# Erlang
+# https://github.com/talentdeficit/erlenv
+- name: erlenv installation
+  block:
+    - name: erlenv directory
+      stat:
+        path: ~/.anyenv/envs/erlenv/releases/{{ runtime_version }}
+      register: erlenv_install_dir
+
+    - name: Build erlang {{ runtime_version }}
+      command: "kerl build {{ runtime_version }} {{ runtime_version }}"
+      when: not erlenv_install_dir.stat.exists
+
+    - name: Install erlang {{ runtime_version }}
+      command: "kerl install {{ runtime_version }} ~/.anyenv/envs/erlenv/releases/{{ runtime_version }}"
+      when: not erlenv_install_dir.stat.exists
+
+    - name: set erlenv global version
+      command: "erlenv global {{ runtime_global }}"
+
+  when: runtime_legacy and runtime_name == 'erlenv'
+
+# Elixir
+- name: exenv directory
+  stat:
+    path: ~/.anyenv/envs/exenv/versions/{{ runtime_version }}
+  register: exenv_install_dir
+
+- name: exenv installation
+  block:
+    - name: Install exenv
+      command: "exenv install {{ runtime_version }}"
+      notify: reload shell
+
+    - name: set exenv global version
+      command: "exenv global {{ runtime_global }}"
+
+  when: runtime_legacy and runtime_name == 'exenv' and not exenv_install_dir.stat.exists
+
+# Java
+- name: jenv installation
+  block:
+    - name: Find installed jdk list
+      find:
+        path: /Library/Java/JavaVirtualMachines/
+        file_type: directory
+        recurse: no
+      register: jdk_path_list
+
+    - name: Add jenv
+      command: "jenv add {{ jdk_path.path }}/Contents/Home"
+      with_items: "{{ jdk_path_list.files }}"
+      loop_control:
+        loop_var: jdk_path
+
+    - name: set jenv global version
+      command: "jenv global {{ runtime_global }}"
+
+  when: runtime_legacy and runtime_name == 'jenv'

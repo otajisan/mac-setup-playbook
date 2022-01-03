@@ -5,7 +5,7 @@ default_shell: /bin/zsh
 zsh_theme: bira
 
 # anyenv
-pyenv_version: 3.9.0
+pyenv_version: 3.10.0
 nodenv_version: 17.0.1
 goenv_version: 1.17.0
 java_version: openjdk-13.0.1.jdk

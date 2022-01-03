@@ -1,0 +1,37 @@
+---
+- name: Update homebrew
+  homebrew:
+    update_homebrew: yes
+    upgrade_all: yes
+
+- block:
+  - name: Install AWS CLI
+    homebrew:
+      name: awscli
+      state: present
+    tags:
+      - aws
+      - awscli
+
+# https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/eksctl.html
+- block:
+  - name: tap eksctl
+    homebrew_tap:
+      name: weaveworks/tap
+      state: present
+
+  - name: Install eksctl
+    homebrew:
+      name: weaveworks/tap/eksctl
+      state: present
+
+  - name: Upgrade eksctl
+    command: "brew upgrade eksctl && brew link --overwrite eksctl"
+
+  - name: Install aws-iam-authenticator
+    homebrew:
+      name: aws-iam-authenticator
+      state: present
+  tags:
+    - aws
+    - eksctl

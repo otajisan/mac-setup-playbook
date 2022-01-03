@@ -1,0 +1,47 @@
+---
+- name: Update homebrew
+  homebrew:
+    update_homebrew: yes
+    upgrade_all: yes
+
+- block:
+  - name: Install anyenv
+    homebrew:
+      name: anyenv
+      state: present
+
+  - name: anyenv init
+    command: "anyenv init"
+    notify: reload shell
+    register: ret
+    failed_when: >
+      (ret.rc != 1)
+
+  - name: anyenv install --init
+    command: "anyenv install --init"
+    register: ret
+    failed_when: >
+      (ret.rc != 1)
+
+  tags:
+    - anyenv
+    - anyenv-init
+
+- block:
+  - name: Install each envs
+    command: "anyenv install {{ item.name }} --skip-existing"
+    notify: reload shell
+    loop: "{{ anyenv }}"
+
+  - include_tasks: env-install.yml
+    vars:
+      runtime_name: '{{ item.0.name }}'
+      runtime_version: '{{ item.1 }}'
+      runtime_global: '{{ item.0.global }}'
+      runtime_legacy: '{{ item.0.legacy }}'
+    with_subelements:
+      - "{{ anyenv }}"
+      - versions
+
+  tags:
+    - anyenv

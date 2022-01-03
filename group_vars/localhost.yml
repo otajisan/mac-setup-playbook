@@ -1,3 +1,46 @@
+homebrew:
+  taps:
+    - homebrew/cask
+    - homebrew/core
+  packages:
+    - name: ansible
+    - name: bash-completion
+    - name: docker
+    - name: git
+    - name: jq
+    - name: tree
+    - name: vim
+    - name: neovim
+    - name: wget
+    - name: snyk
+    - name: fish
+    - name: gnu-tar
+    # Erlang build tool
+    - name: kerl
+
+  cask:
+    - name: appcleaner
+    - name: cyberduck
+    - name: docker
+    - name: google-cloud-sdk
+    - name: google-japanese-ime
+    - name: skitch
+    - name: startninja
+    #- name: station
+    - name: visual-studio-code
+    - name: vagrant
+    - name: virtualbox
+    # corretto jdk
+    - name: corretto
+    - name: corretto8
+    - name: corretto11
+    # adopt open jdk
+    - name: adoptopenjdk8
+    - name: adoptopenjdk11
+    # Microsoft Open JDK
+    - name: microsoft-openjdk
+    - name: microsoft-openjdk11
+
 dotfiles:
   - .bash_profile
   - .bashrc
@@ -8,3 +51,50 @@ dotfiles:
   - .profile.software
   - .tmux.conf
   - .dockerrc
+
+anyenv:
+  - name: jenv
+    legacy: yes
+    global: openjdk64-13.0.1
+    versions:
+      - ""
+  - name: pyenv
+    legacy: no
+    global: 3.10.0
+    versions:
+      - 3.10.0
+  - name: nodenv
+    legacy: no
+    global: 17.0.1
+    versions:
+      - 17.0.1
+  - name: goenv
+    legacy: no
+    global: 1.17.0
+    versions:
+      - 1.17.0
+  - name: rbenv
+    legacy: no
+    global: 2.5.0
+    versions:
+      - 2.5.0
+  - name: erlenv
+    legacy: yes
+    global: 24.2
+    versions:
+      - 24.2
+  - name: exenv
+    legacy: yes
+    global: 1.13.1
+    versions:
+      - 1.13.1
+  - name: tfenv
+    legacy: yes
+    global: 1.1.2
+    versions:
+      - 1.1.2
+  #- name: sbtenv
+  #  legacy: no
+  #  global: sbt-1.1.1
+  #  versions:
+  #    - sbt-1.1.1
