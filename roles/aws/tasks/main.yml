@@ -26,7 +26,7 @@
       state: present
 
   - name: Upgrade eksctl
-    command: "brew upgrade eksctl && brew link --overwrite eksctl"
+    shell: "brew upgrade eksctl && brew link --overwrite eksctl"
 
   - name: Install aws-iam-authenticator
     homebrew:

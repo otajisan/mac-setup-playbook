@@ -23,10 +23,10 @@ homebrew:
     - name: docker
     - name: google-cloud-sdk
     - name: google-japanese-ime
-    - name: skitch
+    #- name: skitch
     - name: startninja
     #- name: station
-    - name: visual-studio-code
+    #- name: visual-studio-code
     - name: vagrant
     - name: virtualbox
     # corretto jdk
