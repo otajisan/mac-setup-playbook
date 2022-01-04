@@ -38,4 +38,6 @@ return require('packer').startup(function()
 
   use 'neovim/nvim-lspconfig'
 
+  use {"ellisonleao/glow.nvim"}
+
 end)
