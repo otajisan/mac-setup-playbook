@@ -2,6 +2,7 @@ homebrew:
   taps:
     - homebrew/cask
     - homebrew/core
+    - snyk/tap
   packages:
     - name: ansible
     - name: bash-completion
@@ -13,6 +14,7 @@ homebrew:
     - name: wget
     - name: snyk
     - name: fish
+    - name: tmux
     - name: gnu-tar
     # Erlang build tool
     - name: kerl
@@ -20,15 +22,15 @@ homebrew:
   cask:
     - name: appcleaner
     - name: cyberduck
-    - name: docker
     - name: google-cloud-sdk
-    - name: google-japanese-ime
-    #- name: skitch
+    #- name: google-japanese-ime
+    - name: shiftit
+    - name: skitch
     - name: startninja
     #- name: station
-    #- name: visual-studio-code
-    - name: vagrant
-    - name: virtualbox
+    - name: visual-studio-code
+    #- name: vagrant
+    #- name: virtualbox
     # corretto jdk
     - name: corretto
     - name: corretto8
