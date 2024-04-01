@@ -3,7 +3,6 @@
   stat:
     path: $HOME/.sdkman
     get_checksum: false
-    get_md5: false
   register: sdkman_installed
 
 # https://sdkman.io/install

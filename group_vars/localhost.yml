@@ -14,8 +14,11 @@ homebrew:
     - name: snyk
     - name: fish
     - name: gnu-tar
+    - name: zsh-syntax-highlighting
     # Erlang build tool
     - name: kerl
+    - name: tmux
+    - name: reattach-to-user-namespace
 
   cask:
     - name: appcleaner

@@ -3,7 +3,6 @@
   stat:
     path: $HOME/.oh-my-zsh
     get_checksum: false
-    get_md5: false
   register: ohmyzsh_installed
 
 - name: oh-my-zsh Installation
